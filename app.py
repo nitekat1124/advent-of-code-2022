@@ -10,6 +10,7 @@ def main():
     parser.add_argument("--raw", action="store_true", help="Optional, use raw input instead of stripped input")
     parser.add_argument("--add", action="store_true", help="Optional, create daily file")
     parser.add_argument("--add-test-file", metavar="test_number", type=int, help="Optional, create additional test files")
+    parser.add_argument("--submit", action="store_true", help="Optional, submit your answer to AoC")
     args = parser.parse_args()
 
     if not 0 < args.day < 26:
@@ -29,10 +30,8 @@ def main():
         sol = importlib.import_module(f"solutions.day{args.day:02d}").Solution(args.day, args.raw)
         print(f"the answer is {answer}\n" if (answer := sol.solve(part_num=args.part)) is not None else "")
 
-        if answer:
-            to_submit = input("want to submit answer? [y/N] ")
-            if to_submit.lower() == "y":
-                Submission.send_answer(args.day, args.part, answer)
+        if answer and args.submit is True:
+            Submission.send_answer(args.day, args.part, answer)
 
 
 if __name__ == "__main__":
