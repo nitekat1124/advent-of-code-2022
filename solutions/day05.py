@@ -49,10 +49,10 @@ class Solution(SolutionBase):
                     stacks[i + 1].append(v)
 
         for line in procedures:
-            _, a, _, b, _, c = [int(v) if i % 2 else v for i, v in enumerate(line.split())]
-            stacks[c].extend(stacks[b][-a:][::-1])
-            # stacks[b] = stacks[b][:-a]
-            del stacks[b][-a:]
+            _, move, _, _from, _, to = [int(v) if i % 2 else v for i, v in enumerate(line.split())]
+            stacks[to].extend(stacks[_from][-move:][::-1])
+            # stacks[_from] = stacks[_from][:-move]
+            del stacks[_from][-move:]
 
         return "".join(stacks[i][-1] for i in range(1, stack_num + 1))
 
@@ -74,9 +74,9 @@ class Solution(SolutionBase):
                     stacks[i + 1].append(v)
 
         for line in procedures:
-            _, a, _, b, _, c = [int(v) if i % 2 else v for i, v in enumerate(line.split())]
-            stacks[c].extend(stacks[b][-a:])
-            # stacks[b] = stacks[b][:-a]
-            del stacks[b][-a:]
+            _, move, _, _from, _, to = [int(v) if i % 2 else v for i, v in enumerate(line.split())]
+            stacks[to].extend(stacks[_from][-move:])
+            # stacks[_from] = stacks[_from][:-move]
+            del stacks[_from][-move:]
 
         return "".join(stacks[i][-1] for i in range(1, stack_num + 1))
