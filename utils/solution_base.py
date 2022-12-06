@@ -2,9 +2,10 @@ from utils.puzzle_reader import PuzzleReader
 
 
 class SolutionBase:
-    def __init__(self, day_num: int = -1, is_raw: bool = False):
+    def __init__(self, day_num: int = -1, is_raw: bool = False, skip_test: bool = False):
         self.day_num = day_num
         self.is_raw = is_raw
+        self.skip_test = skip_test
         self.data = PuzzleReader.get_puzzle_input(self.day_num, self.is_raw)
 
     def get_test_input(self):
@@ -14,7 +15,8 @@ class SolutionBase:
         return PuzzleReader.get_test_result(self.day_num, part_num)
 
     def solve(self, part_num: int):
-        self.test_runner(part_num)
+        if not self.skip_test:
+            self.test_runner(part_num)
 
         func = getattr(self, f"part{part_num}")
         result = func(self.data)
