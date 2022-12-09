@@ -52,7 +52,7 @@ class SolutionBase:
     def benchmark(self, _print=False):
         if _print and len(self.benchmark_times) > 0 and len(self.benchmark_times) % 2 == 0:
             t = self.benchmark_times[-1] - self.benchmark_times[-2]
-            units = ["s", "ms", "us", "ns"]
+            units = ["s", "ms", "µs", "ns"]
             unit_idx = 0
             while t < 1:
                 t *= 1000
