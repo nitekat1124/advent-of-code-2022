@@ -1,11 +1,13 @@
-import argparse, importlib
+import argparse, importlib, datetime
 from utils.submission import Submission
 from utils.files import Files
 
 
 def main():
+    _today = datetime.date.today().day
+
     parser = argparse.ArgumentParser(description="Advent of Code solution runner")
-    parser.add_argument("-d", "--day", dest="day", required=True, default=1, metavar="day_number", type=int, help="Required, day number of the AoC event")
+    parser.add_argument("-d", "--day", dest="day", default=_today, metavar="day_number", type=int, help="Required, day number of the AoC event")
     parser.add_argument("-p", "--part", dest="part", default=1, metavar="part_number", type=int, help="Required, part number of the day of the AoC event")
     parser.add_argument("--raw", action="store_true", help="Optional, use raw input instead of stripped input")
     parser.add_argument("--add", action="store_true", help="Optional, create daily file")
