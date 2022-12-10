@@ -3,7 +3,7 @@
 My solutions for [Advent of Code 2022](https://adventofcode.com/2022/) using Python3
 
 ```
-usage: app.py [-h] -d day_number [-p part_number] [--raw] [--add] [--add-test-file test_number] [--skip-test] [--benchmark] [--submit]
+usage: app.py [-h] [-d day_number] [-p part_number] [--raw] [--add] [--add-test-file test_number] [--skip-test] [--benchmark] [--submit]
 
 Advent of Code solution runner
 
