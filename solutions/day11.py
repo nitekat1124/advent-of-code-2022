@@ -45,7 +45,15 @@ class Solution(SolutionBase):
         monkeys = []
         for i in data:
             items = deque([*map(int, i[1].split(":")[1].strip().split(", "))])
-            ope = self.parse_operation(i[2].split("=")[1].strip())
+            match i[2].split("=")[1].strip().split():
+                case ["old", "+", "old"]:
+                    ope = lambda x: x + x
+                case ["old", "+", val]:
+                    ope = lambda x, val=int(val): x + val
+                case ["old", "*", "old"]:
+                    ope = lambda x: x * x
+                case ["old", "*", val]:
+                    ope = lambda x, val=int(val): x * val
             test = int(i[3].split("by")[1].strip())
             target = [int(i[5].split("monkey")[1].strip()), int(i[4].split("monkey")[1].strip())]  # [if_false, if_true]
 
@@ -53,14 +61,3 @@ class Solution(SolutionBase):
             monkeys.append(monkey)
 
         return monkeys
-
-    def parse_operation(self, ope):
-        match ope.split():
-            case ["old", "+", "old"]:
-                return lambda x: x + x
-            case ["old", "+", val]:
-                return lambda x: x + int(val)
-            case ["old", "*", "old"]:
-                return lambda x: x * x
-            case ["old", "*", val]:
-                return lambda x: x * int(val)
