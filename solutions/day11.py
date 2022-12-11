@@ -12,7 +12,7 @@ class Solution(SolutionBase):
                 while m["items"]:
                     m["times"] += 1
                     worry = m["items"].popleft()
-                    worry = self.run_operation(m["ope"], worry)
+                    worry = m["ope"](worry)
                     worry //= 3
                     test = worry % m["test"] == 0
                     target = m["target"][test]
@@ -30,7 +30,7 @@ class Solution(SolutionBase):
                 while m["items"]:
                     m["times"] += 1
                     worry = m["items"].popleft()
-                    worry = self.run_operation(m["ope"], worry)
+                    worry = m["ope"](worry)
                     worry %= test_lcm
                     test = worry % m["test"] == 0
                     target = m["target"][test]
@@ -45,7 +45,7 @@ class Solution(SolutionBase):
         monkeys = []
         for i in data:
             items = deque([*map(int, i[1].split(":")[1].strip().split(", "))])
-            ope = i[2].split("=")[1].strip()
+            ope = self.parse_operation(i[2].split("=")[1].strip())
             test = int(i[3].split("by")[1].strip())
             target = [int(i[5].split("monkey")[1].strip()), int(i[4].split("monkey")[1].strip())]  # [if_false, if_true]
 
@@ -54,13 +54,13 @@ class Solution(SolutionBase):
 
         return monkeys
 
-    def run_operation(self, ope, x):
+    def parse_operation(self, ope):
         match ope.split():
             case ["old", "+", "old"]:
-                return x + x
+                return lambda x: x + x
             case ["old", "+", val]:
-                return x + int(val)
+                return lambda x: x + int(val)
             case ["old", "*", "old"]:
-                return x * x
+                return lambda x: x * x
             case ["old", "*", val]:
-                return x * int(val)
+                return lambda x: x * int(val)
