@@ -1,14 +1,15 @@
+import json
 from utils.solution_base import SolutionBase
 from functools import cmp_to_key
 
 
 class Solution(SolutionBase):
     def part1(self, data):
-        data = [[*map(eval, data[i : i + 2])] for i in range(0, len(data), 3)]
+        data = [[*map(json.loads, data[i : i + 2])] for i in range(0, len(data), 3)]
         return sum(idx + 1 for idx, [a, b] in enumerate(data) if self.compare(a, b) < 0)
 
     def part2(self, data):
-        data = [*map(eval, [i for i in data if i != ""])] + [[[2]], [[6]]]
+        data = [*map(json.loads, [i for i in data if i != ""])] + [[[2]], [[6]]]
         data.sort(key=cmp_to_key(self.compare))
         return (data.index([[2]]) + 1) * (data.index([[6]]) + 1)
 
