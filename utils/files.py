@@ -1,5 +1,6 @@
 import urllib.request, urllib.parse
-import os, sys, json
+import os, sys, json, datetime
+from time import sleep
 from pathlib import Path
 
 
@@ -51,6 +52,15 @@ class Files:
 
         input_path = Path(f"{folder}/{files[0]}")
         if input_path.stat().st_size == 0:
+            now = datetime.datetime.utcnow()
+            available_to_download = datetime.datetime(int(path.split(os.sep)[-1].split("-")[-1]), 12, day, 5, 0, 0)
+            if now < available_to_download:
+                print("Puzzle input not available to download until", available_to_download.strftime("%Y-%m-%d %H:%M:%S"), "UTC")
+            while now < available_to_download:
+                print("now:", now.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3], "UTC")
+                sleep(1)
+                now = datetime.datetime.utcnow()
+
             print("Downloading puzzle input...")
             with open(input_path, "w+") as f:
                 f.write(Files.download_puzzle_input(day))
