@@ -55,9 +55,9 @@ class Files:
             now = datetime.datetime.utcnow()
             available_to_download = datetime.datetime(int(path.split(os.sep)[-1].split("-")[-1]), 12, day, 5, 0, 0)
             if now < available_to_download:
-                print("Puzzle input not available to download until", available_to_download.strftime("%Y-%m-%d %H:%M:%S"), "UTC")
+                print("Puzzle input not available to download until", available_to_download.strftime("%Y-%m-%d %H:%M:%S"), "UTC\n")
             while now < available_to_download:
-                print("now:", now.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3], "UTC")
+                print("\033[Fnow:", now.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3], "UTC")
                 sleep(1)
                 now = datetime.datetime.utcnow()
 
