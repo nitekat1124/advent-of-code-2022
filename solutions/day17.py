@@ -64,7 +64,7 @@ class Solution(SolutionBase):
                     rock_idx += 1
                     break
 
-        self.print_room()
+        # self.print_room()
         return len(self.room) - 1
 
     def part2(self, data):
