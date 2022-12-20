@@ -7,11 +7,10 @@ class Solution(SolutionBase):
         _len = len(coords)
 
         for i in range(_len):
-            pos = [p for p, coord in enumerate(coords) if coord[0] == i][0]
-            coord = coords[pos]
+            pos, coord = [(p, coord) for p, coord in enumerate(coords) if coord[0] == i][0]
             new_pos = (pos + coord[1] + (_len - 1)) % (_len - 1)
 
-            coord = coords.pop(pos)
+            coords.pop(pos)
             coords.insert(new_pos, coord)
 
         zero_pos = [p for p, item in enumerate(coords) if item[1] == 0][0]
@@ -27,11 +26,10 @@ class Solution(SolutionBase):
 
         for _ in range(10):
             for i in range(_len):
-                pos = [p for p, coord in enumerate(coords) if coord[0] == i][0]
-                coord = coords[pos]
+                pos, coord = [(p, coord) for p, coord in enumerate(coords) if coord[0] == i][0]
                 new_pos = (pos + coord[1] + (_len - 1)) % (_len - 1)
 
-                coord = coords.pop(pos)
+                coords.pop(pos)
                 coords.insert(new_pos, coord)
 
         zero_pos = [p for p, item in enumerate(coords) if item[1] == 0][0]
