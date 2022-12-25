@@ -16,9 +16,6 @@ class Solution(SolutionBase):
 
     def d2s(self, d):
         mapping = {-2: "=", -1: "-", 0: "0", 1: "1", 2: "2"}
-        d += sum(2 * 5**i for i in range(math.ceil(math.log(d, 5))))
-        r = []
-        while d:
-            d, n = divmod(d, 5)
-            r += mapping[n - 2]
-        return "".join(r[::-1])
+        exp = math.ceil(math.log(d, 5))
+        d += sum(2 * 5**i for i in range(exp))
+        return "".join(mapping[d // (5**i) % 5 - 2] for i in range(exp - 1, -1, -1))
