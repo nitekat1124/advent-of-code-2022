@@ -4,7 +4,8 @@ import math
 
 class Solution(SolutionBase):
     def part1(self, data):
-        return self.d2s(sum(self.s2d(i) for i in data))
+        # use list comprehension
+        return self.d2s(sum([self.s2d(i) for i in data]))
 
     def part2(self, data):
         return "Merry Christmas!"
